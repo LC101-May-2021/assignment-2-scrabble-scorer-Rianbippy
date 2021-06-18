@@ -14,7 +14,7 @@ const oldPointStructure = {
 
 function oldScrabbleScorer(word) {
 	word = word.toUpperCase();
-	let letterPoints = 0;
+	let letterPoints = "";
    
 	for (let i = 0; i < word.length; i++) {
  	  for (const pointValue in oldPointStructure) {
@@ -94,7 +94,13 @@ let scrabbleScoreObj = {
 const scoringAlgorithms = [simpleScoreObj, vowelBonusScoreObj, scrabbleScoreObj];
 
 function scorerPrompt() {
-  console.log("Which scoring algorithm would you like to use?")
+  console.log("Which scoring algorithm would you like to use?");
+  for(let i=0; i<scoringAlgorithms.length; i++) {
+    console.log(`${i} - ${scoringAlgorithms[i].name}: ${scoringAlgorithms[i].description}`)
+  }
+  scorerPromptToSave = input.question("Enter 0, 1, or 2: ");
+  scorerPromptToSave = Number(scorerPromptToSave)
+  console.log (`Score for '${wordToScore}': ${scoringAlgorithms[scorerPromptToSave].scoringFunction(wordToScore)}`)
 }
 
 function transform() {};
@@ -103,7 +109,7 @@ let newPointStructure;
 
 function runProgram() {
    initialPrompt();
-   
+   scorerPrompt();
 }
 
 // Don't write any code below this line //
